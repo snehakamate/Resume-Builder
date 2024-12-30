@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Output</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .resume {
+            max-width: 600px; /* Reduced width */
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .section h2 {
+            color: #9997ed;
+            margin-bottom: 10px;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 15px;
+            font-size: 16px;
+            color: rgb(10, 1, 1);
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="resume-title">Your Resume</h1>
+    <div class="resume" id="resume"></div>
+    <button onclick="printResume()">Print Resume</button>
+
+    <script>
+        // Retrieve data from localStorage
+        const retrievedData = JSON.parse(localStorage.getItem('resumeData'));
+        if (retrievedData) {
+            document.getElementById('resume').innerHTML = `
+                <div class="section">
+                    <h2>${retrievedData.fullName}</h2>
+                    <p><strong>Email:</strong> <a href="mailto:${retrievedData.email}">${retrievedData.email}</a></p>
+                    <p><strong>Phone Number:</strong> ${retrievedData.phone}</p>
+                    <p><strong>Address:</strong> ${retrievedData.address}</p>
+                    <p><strong>LinkedIn:</strong> <a href="${retrievedData.linkedin}" target="_blank">${retrievedData.linkedin}</a></p>
+                </div>
+                <div class="section">
+                    <h2>Education</h2>
+                    <p><strong>Primary:</strong> ${retrievedData.Primary}</p>
+                    <p><strong>Secondary:</strong> ${retrievedData.Secondary}</p>
+                    <p><strong>Higher Secondary:</strong> ${retrievedData.HigherSecondary}</p>
+                </div>
+                <div class="section">
+                    <h2>Work Experience</h2>
+                    <p>${retrievedData.experience}</p>
+                </div>
+                <div class="section">
+                    <h2>Skills</h2>
+                    <ul>
+                        ${retrievedData.skills.split(',').map(skill => `<li>${skill.trim()}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="section">
+                    <h2>Certifications</h2>
+                    <ul>
+                        ${retrievedData.certifications.split(',').map(cert => `<li>${cert.trim()}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="section">
+                    <h2>Languages</h2>
+                    <ul>
+                        ${retrievedData.languages.split(',').map(lang => `<li>${lang.trim()}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="section">
+                    <h2>Projects</h2>
+                    <ul>
+                        ${retrievedData.project.split(',').map(project => `<li>${project.trim()}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        } else {
+            document.getElementById('resume').innerHTML = '<p>No resume data found.</p>';
+        }
+
+        function printResume() {
+            document.getElementById('resume-title').style.display = 'none'; // Hide title
+            document.querySelector('button').style.display = 'none'; // Hide button
+            window.print();
+            document.getElementById('resume-title').style.display = 'block'; // Show title after printing
+            document.querySelector('button').style.display = 'block'; // Show button after printing
+        }
+    </script>
+
+</body>
+</html>

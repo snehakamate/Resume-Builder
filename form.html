@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[type="button"] {
+      background-color: #28a745;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+    input[type="button"]:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Resume Form</h1>
+  
+  <form id="resume-form">
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="johndoe@example.com" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" placeholder="+123456789" required>
+
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" rows="2" placeholder="Your current address"></textarea>
+
+    <label for="linkedin">LinkedIn Profile:</label>
+    <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+
+    <!-- Education Section -->
+    <h2>Education</h2>
+
+    <label for="Primary">Primary:</label>
+    <textarea id="pRIMARY" name="school" rows="2" placeholder="Primary Name, Location, Years Attended"></textarea>
+
+    <label for="Secondary"> Secondary:</label>
+    <textarea id="Secondary" name="Secondary" rows="2" placeholder="Institution Name, Location, Years Attended"></textarea>
+
+    <label for="higher secondary">Higher Secondary:</label>
+    <textarea id="higher secondary" name="higher secondary" rows="2" placeholder="Degree, University, Year of Graduation"></textarea>
+
+    <label for="experience">Work Experience:</label>
+    <textarea id="experience" name="experience" rows="6" placeholder="Job Title, Company, Dates, Responsibilities"></textarea>
+
+    <label for="skills">Skills:</label>
+    <textarea id="skills" name="skills" rows="4" placeholder="List your relevant skills"></textarea>
+
+    <label for="certifications">Certifications:</label>
+    <textarea id="certifications" name="certifications" rows="4" placeholder="Any certifications you have earned"></textarea>
+
+    <label for="languages">Languages:</label>
+    <textarea id="languages" name="languages" rows="2" placeholder="Languages you speak"></textarea>
+
+    <label for="project">Projects:</label>
+    <textarea id="project" name="project" rows="4" placeholder="Title, Description, Technologies Used"></textarea>
+
+    
+
+    <input type="button" id="create-button" value="Create Resume">
+  </form>
+
+  <script>
+    document.getElementById('create-button').addEventListener('click', function() {
+        // Gather form data
+        const formData = new FormData(document.getElementById('resume-form'));
+        const data = Object.fromEntries(formData.entries());
+        // Store data in localStorage or pass it to the next page in some way
+        localStorage.setItem('resumeData', JSON.stringify(data));
+        // Redirect to the resume template page
+        window.location.href = 'output.html';
+    });
+  </script>
+
+</body>
+</html>
